@@ -5,6 +5,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import pages.*;
+
+import java.time.Duration;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -16,44 +19,40 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 //		webDriver.switchTo().window(tabs.get(1));
 public class WebOrderChromeDriverTest {
 
-	WebDriver webDriver;
+    WebDriver driver;
 
-	@BeforeEach
-	void setUp() {
+    @BeforeEach
+    void setUp() {
 
-		webDriver = new ChromeDriver();
-		webDriver.manage().window().maximize();
-		webDriver.get("https://InarAcademy:Fk160621.@test.inar-academy.com");
-	}
+        driver = new ChromeDriver();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        driver.manage().window().maximize();
+        driver.get("https://InarAcademy:Fk160621.@test.inar-academy.com");
+    }
 
-	@Test
-	void testSeleniumWebDriver() throws InterruptedException {
+    @Test
+    void testSeleniumWebDriver() throws InterruptedException {
 
-		WebElement webOrder = webDriver.findElement(By.xpath("//*[@id='navbar']/div/a[1]"));
-		webOrder.click();
+        HomePage homePage = new HomePage(driver);
+        WebOrderLoginPage webOrderLoginPage = homePage.clickOnWebOrder();
+        WebOrderHomePage webOrderHomePage = webOrderLoginPage.verifyLoginAccess("Inar", "Academy");
+        OrderPage orderPage = webOrderHomePage.navigateToOrderPage();
+        String actualTotalValue = orderPage.getTotalForSpecificInputs("TechGadget","1","20");
+        orderPage.enterName("name");
+        orderPage.enterStreet("street");
+        orderPage.enterState("state");
+        orderPage.enterCity("city");
+        orderPage.enterZip("zip");
+        Thread.sleep(8000);
 
-		WebElement userNameElement = webDriver.findElement(By.id("login-username-input"));
-		userNameElement.sendKeys("Inar");
 
-		WebElement passwordElement = webDriver.findElement(By.id("login-password-input"));
-		passwordElement.sendKeys("Academy");
 
-		WebElement loginButtonElement = webDriver.findElement(By.id("login-button"));
-		loginButtonElement.click();
+    }
 
-		Thread.sleep(4000);
+    @AfterEach
+    void tearDown() throws InterruptedException {
 
-		// WebElement welcomeHeading = webDriver.findElement(By.id("welcome-heading"));
-
-		assertEquals("https://InarAcademy:Fk160621.@test.inar-academy.com/weborder", webDriver.getCurrentUrl());
-
-	}
-
-	@AfterEach
-	void tearDown() throws InterruptedException {
-
-		webDriver.quit();
-		webDriver = null;
-	}
-
+        driver.quit();
+        driver = null;
+    }
 }
