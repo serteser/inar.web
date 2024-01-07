@@ -1,21 +1,19 @@
 package pages;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
-public class ViewAllProductsPage {
-    private WebDriver driver;
-    private By viewAllProductsPageLink = By.linkText("View all products");
+public class ViewAllProductsPage extends BasePage {
 
-    public ViewAllProductsPage(WebDriver driver) {
-        this.driver = driver;
-    }
+	@FindBy(linkText = "View all products")
+	private WebElement viewAllProductsPageLink;
 
-public void clickOnViewAllProductsPage(){
-        driver.findElement(viewAllProductsPageLink).click();
-}
+	public ViewAllProductsPage() {
+		super();
+	}
 
-
-
+	public void clickOnViewAllProductsPage() {
+		viewAllProductsPageLink.click();
+	}
 
 }
