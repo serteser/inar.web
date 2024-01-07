@@ -5,8 +5,8 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.inar</groupId>
     <artifactId>inar.web</artifactId>
-    <version>1.0.0</version>
-    
+    <version>1.0.2</version>
+
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
@@ -14,7 +14,7 @@
         <selenium.version>4.15.0</selenium.version>
         <junit.version>5.10.1</junit.version>
     </properties>
-<dependencies>
+    <dependencies>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
@@ -43,9 +43,9 @@
             <version>5.10.1</version>
             <scope>test</scope>
         </dependency>
-</dependencies>
+    </dependencies>
 
- <!-- Build Section: Specifies build configurations like plugins and their settings. -->
+    <!-- Build Section: Specifies build configurations like plugins and their settings. -->
     <build>
         <!-- Plugins Section: Defines plugins used during the build process. -->
         <plugins>
@@ -59,7 +59,6 @@
                     <release>17</release>
                 </configuration>
             </plugin>
-
             <!-- Maven Surefire Plugin: Used for running unit tests. -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
