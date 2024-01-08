@@ -12,10 +12,8 @@ public class HooksOfHamza {
 	@AfterAll
 	public static void tearDownTestEnvironment() {
 
-		if (Driver.getDriver() != null) {
+		Driver.closeDriver();
 
-			Driver.getDriver().quit();
-		}
 	}
 
 }
